@@ -1443,6 +1443,14 @@
 
     <script>
       /* ================= LOADING + PROFILE ================= */
+
+      if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+
+  window.addEventListener('pageshow', function (event) {
+    window.scrollTo(0, 0);
+  });
       window.addEventListener("load", () => {
         window.scrollTo(0, 0);
         const loading = document.querySelector(".loading-overlay");
