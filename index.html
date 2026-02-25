@@ -42,7 +42,7 @@
         min-height: 100vh;
         overflow-x: hidden;
         position: relative;
-        cursor: none;
+        /* cursor: none; */
       }
 
       /* Cursor personalizado dark */
@@ -147,11 +147,16 @@
         opacity: 0;
         visibility: hidden;
         transition: opacity 1s ease;
+      }
+
+      .container__content {
+        padding: 0px 20px;
         max-width: 1400px;
         margin: 0 auto;
-        padding: 20px;
         position: relative;
-        z-index: 10;
+
+        padding-top: 120px;
+        z-index: 5;
       }
 
       /* Header dark theme */
@@ -160,6 +165,20 @@
         margin-bottom: 60px;
         position: relative;
         animation: slideDown 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.2) 0%,
+          rgba(0, 0, 0, 0.4) 40%,
+          rgba(0, 0, 0, 0.8) 75%,
+          #000 100%
+        );
+        z-index: 1;
       }
 
       .header::before {
@@ -749,11 +768,11 @@
 
       .loading-heart {
         /* font-size: 4rem;
-        animation: loading-pulse 1s ease-in-out infinite;
-        color: var(--accent-red);
-        filter: drop-shadow(0 0 20px var(--accent-red)); */
+              animation: loading-pulse 1s ease-in-out infinite;
+              color: var(--accent-red);
+              filter: drop-shadow(0 0 20px var(--accent-red)); */
 
-        font-size: 80px;
+        font-size: 50px;
         font-weight: 800;
         color: var(--accent-red);
         letter-spacing: 5px;
@@ -853,6 +872,17 @@
         }
       }
 
+      header {
+        position: absolute;
+        width: 100%;
+        padding: 20px 60px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 1000;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent);
+      }
+
       @media (min-width: 481px) and (max-width: 768px) {
         .header h1 {
           font-size: 3.5rem;
@@ -879,7 +909,7 @@
       @media (min-width: 1025px) {
         .photo-gallery {
           grid-template-columns: repeat(3, 1fr);
-          gap: 30px;
+          /* gap: 30px; */
           max-width: 900px;
           margin-left: auto;
           margin-right: auto;
@@ -908,7 +938,6 @@
           transform: translateY(0);
         }
       }
-
 
       .nossos-episodios {
         background-clip: text;
@@ -945,6 +974,7 @@
         color: white;
         font-size: 2.5rem;
         font-weight: 600;
+        text-align: center;
       }
 
       .profile-card {
@@ -954,7 +984,7 @@
       }
 
       .profile-card img {
-        width: 250px;
+        width: 180px;
         border-radius: 10px;
         border: 3px solid transparent;
         transition: 0.3s;
@@ -973,6 +1003,125 @@
         margin-top: 10px;
         color: white;
         font-weight: 500;
+      }
+
+      /* ================= HERO ================= */
+
+      .hero {
+        position: relative;
+        height: 100vh;
+        display: flex;
+        align-items: flex-end;
+        padding: 60px;
+        overflow: hidden;
+        background: #000;
+      }
+
+      /* Vídeo ocupa tudo */
+      .hero video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 0;
+        animation: heroZoom 20s ease-in-out infinite alternate;
+      }
+
+      @keyframes heroZoom {
+        from {
+          transform: scale(1);
+        }
+        to {
+          transform: scale(1.1);
+        }
+      }
+
+      /* Gradiente escuro por cima do vídeo */
+      /* .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, #000 10%, transparent 60%);
+        z-index: 1;
+      } */
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 600px;
+      }
+
+      .hero h1 {
+        font-size: 52px;
+        margin-bottom: 20px;
+        line-height: 1.1;
+        color: white;
+      }
+
+      .hero p {
+        margin-bottom: 20px;
+        color: #ccc;
+      }
+
+      .hero button {
+        padding: 12px 25px;
+        background: #e50914;
+        border: none;
+        color: #fff;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .hero button:hover {
+        background: #b20710;
+      }
+
+      .logo {
+        color: #e50914;
+        font-size: 28px;
+        font-weight: 800;
+        letter-spacing: 2px;
+      }
+
+      /* Tablet */
+      @media (min-width: 768px) {
+        .loading-heart {
+          font-size: 22px;
+        }
+
+        .profile-card img {
+          width: 250px;
+        }
+      }
+
+      /* Desktop */
+      @media (min-width: 1024px) {
+        .loading-heart {
+          font-size: 80px;
+        }
+
+        .profile-card img {
+          width: 250px;
+        }
+
+        .hero {
+          height: 90vh;
+        }
+      }
+
+      /* Desativa cursor customizado em dispositivos touch */
+      @media (hover: none) and (pointer: coarse) {
+        .custom-cursor,
+        .cursor-trail {
+          display: none !important;
+        }
+
+        body {
+          cursor: auto;
+        }
       }
     </style>
   </head>
@@ -998,287 +1147,304 @@
 
     <!-- Efeito de ondas -->
     <div class="wave-bg"></div>
-
     <div class="container">
-      <header class="header">
-        <h1>Para o Meu <span class="girlfriend-name"></span></h1>
-        <p>Uma declaração de amor criada especialmente para você ❤️</p>
+      <header>
+        <div class="logo">LOVEFLIX</div>
       </header>
 
-      <main class="love-card">
-        <h2>Minha Princesinha 💕</h2>
-        <div class="love-message">
-          <p>
-            <span class="girlfriend-name"></span>, você é o presente mais lindo
-            que a vida me deu. Cada sorriso seu ilumina meu mundo, cada abraço
-            seu me faz sentir em casa, cada "eu te amo" seu é música para minha
-            alma.
-          </p>
-          <br />
-          <p>
-            Obrigado(a) por ser minha companheira de sonhos, minha parceira de
-            vida, minha melhor amiga e meu grande amor. Neste Dia dos Namorados,
-            quero que saiba: você é tudo que sempre sonhei e muito mais! 💝
-          </p>
+      <div class="hero">
+        <video autoplay muted loop playsinline preload="auto">
+          <source src="video/hero.mp4" type="video/mp4" />
+        </video>
+
+        <div class="hero-content">
+          <h1>Nossa Historia</h1>
+          <p>Uma jornada cheia de amor, risadas e momentos inesquecíveis.</p>
+          <!-- <button onclick="scrollToLetter()">Assistir Agora</button> -->
         </div>
-
-        <button class="surprise-btn" onclick="showSurprise()">
-          ✨ Uma Surpresa Especial Para Você ✨
-        </button>
-
-        <div class="special-message" id="specialMessage">
-          <h3>💖 Do Fundo Do Meu Coração 💖</h3>
-          <br />
-
-          <p>Agora, começando desde o início…</p>
-          <br />
-
-          <p>
-            A primeira vez que saímos foi um completo enigma. Não sabíamos o que
-            poderia acontecer. O beijo não encaixou, encontramos as meninas,
-            caímos, tropeçamos… mas, mesmo assim, nos divertimos muito — apesar
-            de estarmos extremamente tímidos.
-          </p>
-          <br />
-
-          <p>
-            Os encontros seguintes foram praticamente todas as quintas-feiras.
-            Acabou virando sagrado. Cada momento, cada ida ao shopping, cada
-            cinema, cada beijo, cada detalhe, cada surpresa… tudo sempre foi
-            feito com o maior carinho do mundo.
-          </p>
-          <br />
-
-          <p>
-            Eu sei que às vezes sou complicado de lidar, mas saiba que eu te amo
-            imensamente. Você foi uma das melhores coisas que me aconteceram no
-            último ano. Você me fez conhecer São Paulo de verdade — andar de
-            metrô, ir à 25 de Março, ao Brás, perder caronas, carros e metrôs…
-            mas, no fim, sempre dava certo.
-          </p>
-          <br />
-
-          <p>
-            Fomos também para São José dos Campos. Andamos muito, comemos muita
-            coisa gostosa, engordamos juntos e nos demos ainda mais carinho e
-            amor.
-          </p>
-          <br />
-
-          <p>
-            Eu sei também que, no começo, fui seu “pé no saco”. Tentava te
-            brecar, queria te ter só pra mim… porque, na real, eu tinha gostado
-            muito de você e não queria deixar escapar essa pedra rara que
-            apareceu na minha vida. Então eu persisti — e consegui, depois de um
-            tempo. Ninguém ganha de um homem paciente.
-          </p>
-          <br />
-
-          <p>
-            A gente já se divertiu muito, já se irritou, já brigou… mas cada
-            momento foi importante para fortalecer o que temos e para nos tornar
-            pessoas melhores.
-          </p>
-          <br />
-
-          <p>
-            Eu sei que às vezes brigo com você, mas é porque quero o seu bem.
-            Tento colocar juízo em alguns aspectos para que você não erre como
-            eu errei e para te ajudar a subir mais um degrau. Porque eu sou seu
-            fã número 1, seu melhor amigo e seu namorado — e sempre vou querer
-            te ver crescer.
-          </p>
-          <br />
-
-          <p>
-            Não tenho palavras para descrever o que estou sentindo agora. No dia
-            24/02, escrevo essa carta com um aperto no coração, sabendo que o
-            dia está chegando e que não estaremos mais tão perto, nem no mesmo
-            continente.
-          </p>
-          <br />
-
-          <p>
-            Como vou te encher o saco? Te pegar no colo? Te dar tapas, fazer
-            biquinho, pular em você e ter seu carinho o dia todo, inclusive
-            antes de dormir?
-          </p>
-          <br />
-
-          <p>
-            Saiba que cada momento foi especial. Você é uma mulher incrível,
-            forte e determinada — merece ganhar o mundo, os céus, as estrelas e
-            o universo.
-          </p>
-          <br />
-
-          <p>
-            Eu torço muito por você. Que essa nova jornada e esse novo ciclo que
-            vão se iniciar sejam cheios de bênçãos, prosperidade e muito amor.
-            Te desejo toda a sorte do mundo.
-          </p>
-          <br />
-
-          <p>
-            Isso não é um tchau, não é um adeus, muito menos uma despedida. É um
-            até logo.
-          </p>
-          <br />
-
-          <p>
-            Que o fio vermelho do destino nunca se rompa… E que possamos nos
-            encontrar novamente, algum dia, em algum lugar, a qualquer hora.
-          </p>
-        </div>
-      </main>
-
-      <div>
-        <h1 class="nossos-episodios">Nossos Episodios</h1>
-
-        <section class="photo-gallery">
-          <div class="photo-frame">
-            <img
-              src="img/1.jpeg"
-              alt="Nossa primeira foto juntos"
-              onerror="this.style.display='none'; this.parentNode.innerHTML='📸<br><small>Foto 1</small>';"
-            />
-          </div>
-          <div class="photo-frame">
-            <img
-              src="img/2.jpeg"
-              alt="Momento especial"
-              onerror="this.style.display='none'; this.parentNode.innerHTML='💕<br><small>Foto 2</small>';"
-            />
-          </div>
-          <div class="photo-frame">
-            <img
-              src="img/3.jpeg"
-              alt="Lembrança querida"
-              onerror="this.style.display='none'; this.parentNode.innerHTML='🌹<br><small>Foto 3</small>';"
-            />
-          </div>
-          <div class="photo-frame">
-            <img
-              src="img/4.jpeg"
-              alt="Nosso amor"
-              onerror="this.style.display='none'; this.parentNode.innerHTML='✨<br><small>Foto 4</small>';"
-            />
-          </div>
-          <div class="photo-frame">
-            <img
-              src="img/5.jpeg"
-              alt="Momento único"
-              onerror="this.style.display='none'; this.parentNode.innerHTML='💖<br><small>Foto 5</small>';"
-            />
-          </div>
-          <div class="photo-frame">
-            <img
-              src="img/6.jpeg"
-              alt="Para sempre"
-              onerror="this.style.display='none'; this.parentNode.innerHTML='🥰<br><small>Foto 6</small>';"
-            />
-          </div>
-          <div class="photo-frame">
-            <img
-              src="img/7.jpeg"
-              alt="Nosso amor"
-              onerror="this.style.display='none'; this.parentNode.innerHTML='✨<br><small>Foto 4</small>';"
-            />
-          </div>
-          <div class="photo-frame">
-            <img
-              src="img/8.jpeg"
-              alt="Momento único"
-              onerror="this.style.display='none'; this.parentNode.innerHTML='💖<br><small>Foto 5</small>';"
-            />
-          </div>
-          <div class="photo-frame">
-            <img
-              src="img/9.jpeg"
-              alt="Para sempre"
-              onerror="this.style.display='none'; this.parentNode.innerHTML='🥰<br><small>Foto 6</small>';"
-            />
-          </div>
-          <div class="photo-frame">
-            <img
-              src="img/10.jpeg"
-              alt="Nosso amor"
-              onerror="this.style.display='none'; this.parentNode.innerHTML='✨<br><small>Foto 4</small>';"
-            />
-          </div>
-          <div class="photo-frame">
-            <img
-              src="img/11.jpeg"
-              alt="Momento único"
-              onerror="this.style.display='none'; this.parentNode.innerHTML='💖<br><small>Foto 5</small>';"
-            />
-          </div>
-          <div class="photo-frame">
-            <img
-              src="img/12.jpeg"
-              alt="Para sempre"
-              onerror="this.style.display='none'; this.parentNode.innerHTML='🥰<br><small>Foto 6</small>';"
-            />
-          </div>
-          <div class="photo-frame">
-            <img
-              src="img/13.jpeg"
-              alt="Nosso amor"
-              onerror="this.style.display='none'; this.parentNode.innerHTML='✨<br><small>Foto 4</small>';"
-            />
-          </div>
-          <div class="photo-frame">
-            <img
-              src="img/14.jpeg"
-              alt="Momento único"
-              onerror="this.style.display='none'; this.parentNode.innerHTML='💖<br><small>Foto 5</small>';"
-            />
-          </div>
-          <div class="photo-frame">
-            <img
-              src="img/15.jpeg"
-              alt="Para sempre"
-              onerror="this.style.display='none'; this.parentNode.innerHTML='🥰<br><small>Foto 6</small>';"
-            />
-          </div>
-          <div class="photo-frame">
-            <img
-              src="img/16.jpeg"
-              alt="Nosso amor"
-              onerror="this.style.display='none'; this.parentNode.innerHTML='✨<br><small>Foto 4</small>';"
-            />
-          </div>
-          <div class="photo-frame">
-            <img
-              src="img/17.jpeg"
-              alt="Momento único"
-              onerror="this.style.display='none'; this.parentNode.innerHTML='💖<br><small>Foto 5</small>';"
-            />
-          </div>
-          <div class="photo-frame">
-            <img
-              src="img/18.jpeg"
-              alt="Para sempre"
-              onerror="this.style.display='none'; this.parentNode.innerHTML='🥰<br><small>Foto 6</small>';"
-            />
-          </div>
-        </section>
       </div>
+      <div class="container__content">
+        <div class="header">
+          <h1>Para o Meu <span class="girlfriend-name"></span></h1>
+          <p>Uma declaração de amor criada especialmente para você ❤️</p>
+        </div>
 
-      <footer class="footer">
-        <p>Criado com todo <span class="heart-beat">❤️</span> do universo</p>
-        <p>
-          Para a <span class="girlfriend-name"></span> mais especial do mundo!
-          💫
-        </p>
-        <p>Te amo mil milhões! 💑</p>
-      </footer>
+        <main class="love-card">
+          <h2>Minha Princesinha 💕</h2>
+          <div class="love-message">
+            <p>
+              <span class="girlfriend-name"></span>, você é o presente mais
+              lindo que a vida me deu. Cada sorriso seu ilumina meu mundo, cada
+              abraço seu me faz sentir em casa, cada "eu te amo" seu é música
+              para minha alma.
+            </p>
+            <br />
+            <p>
+              Obrigado(a) por ser minha companheira de sonhos, minha parceira de
+              vida, minha melhor amiga e meu grande amor. Neste Dia dos
+              Namorados, quero que saiba: você é tudo que sempre sonhei e muito
+              mais! 💝
+            </p>
+          </div>
+
+          <button class="surprise-btn" onclick="showSurprise()">
+            ✨ Uma Surpresa Especial Para Você ✨
+          </button>
+
+          <div class="special-message" id="specialMessage">
+            <h3>💖 Do Fundo Do Meu Coração 💖</h3>
+            <br />
+
+            <p>Agora, começando desde o início…</p>
+            <br />
+
+            <p>
+              A primeira vez que saímos foi um completo enigma. Não sabíamos o
+              que poderia acontecer. O beijo não encaixou, encontramos as
+              meninas, caímos, tropeçamos… mas, mesmo assim, nos divertimos
+              muito — apesar de estarmos extremamente tímidos.
+            </p>
+            <br />
+
+            <p>
+              Os encontros seguintes foram praticamente todas as quintas-feiras.
+              Acabou virando sagrado. Cada momento, cada ida ao shopping, cada
+              cinema, cada beijo, cada detalhe, cada surpresa… tudo sempre foi
+              feito com o maior carinho do mundo.
+            </p>
+            <br />
+
+            <p>
+              Eu sei que às vezes sou complicado de lidar, mas saiba que eu te
+              amo imensamente. Você foi uma das melhores coisas que me
+              aconteceram no último ano. Você me fez conhecer São Paulo de
+              verdade — andar de metrô, ir à 25 de Março, ao Brás, perder
+              caronas, carros e metrôs… mas, no fim, sempre dava certo.
+            </p>
+            <br />
+
+            <p>
+              Fomos também para São José dos Campos. Andamos muito, comemos
+              muita coisa gostosa, engordamos juntos e nos demos ainda mais
+              carinho e amor.
+            </p>
+            <br />
+
+            <p>
+              Eu sei também que, no começo, fui seu “pé no saco”. Tentava te
+              brecar, queria te ter só pra mim… porque, na real, eu tinha
+              gostado muito de você e não queria deixar escapar essa pedra rara
+              que apareceu na minha vida. Então eu persisti — e consegui, depois
+              de um tempo. Ninguém ganha de um homem paciente.
+            </p>
+            <br />
+
+            <p>
+              A gente já se divertiu muito, já se irritou, já brigou… mas cada
+              momento foi importante para fortalecer o que temos e para nos
+              tornar pessoas melhores.
+            </p>
+            <br />
+
+            <p>
+              Eu sei que às vezes brigo com você, mas é porque quero o seu bem.
+              Tento colocar juízo em alguns aspectos para que você não erre como
+              eu errei e para te ajudar a subir mais um degrau. Porque eu sou
+              seu fã número 1, seu melhor amigo e seu namorado — e sempre vou
+              querer te ver crescer.
+            </p>
+            <br />
+
+            <p>
+              Não tenho palavras para descrever o que estou sentindo agora. No
+              dia 24/02, escrevo essa carta com um aperto no coração, sabendo
+              que o dia está chegando e que não estaremos mais tão perto, nem no
+              mesmo continente.
+            </p>
+            <br />
+
+            <p>
+              Como vou te encher o saco? Te pegar no colo? Te dar tapas, fazer
+              biquinho, pular em você e ter seu carinho o dia todo, inclusive
+              antes de dormir?
+            </p>
+            <br />
+
+            <p>
+              Saiba que cada momento foi especial. Você é uma mulher incrível,
+              forte e determinada — merece ganhar o mundo, os céus, as estrelas
+              e o universo.
+            </p>
+            <br />
+
+            <p>
+              Eu torço muito por você. Que essa nova jornada e esse novo ciclo
+              que vão se iniciar sejam cheios de bênçãos, prosperidade e muito
+              amor. Te desejo toda a sorte do mundo.
+            </p>
+            <br />
+
+            <p>
+              Isso não é um tchau, não é um adeus, muito menos uma despedida. É
+              um até logo.
+            </p>
+            <br />
+
+            <p>
+              Que o fio vermelho do destino nunca se rompa… E que possamos nos
+              encontrar novamente, algum dia, em algum lugar, a qualquer hora.
+            </p>
+          </div>
+        </main>
+
+        <div>
+          <h1 class="nossos-episodios">Nossos Episodios</h1>
+
+          <section class="photo-gallery">
+            <div class="photo-frame">
+              <img
+                src="img/1.jpeg"
+                alt="Nossa primeira foto juntos"
+                onerror="this.style.display='none'; this.parentNode.innerHTML='📸<br><small>Foto 1</small>';"
+              />
+            </div>
+            <div class="photo-frame">
+              <img
+                src="img/2.jpeg"
+                alt="Momento especial"
+                onerror="this.style.display='none'; this.parentNode.innerHTML='💕<br><small>Foto 2</small>';"
+              />
+            </div>
+            <div class="photo-frame">
+              <img
+                src="img/3.jpeg"
+                alt="Lembrança querida"
+                onerror="this.style.display='none'; this.parentNode.innerHTML='🌹<br><small>Foto 3</small>';"
+              />
+            </div>
+            <div class="photo-frame">
+              <img
+                src="img/4.jpeg"
+                alt="Nosso amor"
+                onerror="this.style.display='none'; this.parentNode.innerHTML='✨<br><small>Foto 4</small>';"
+              />
+            </div>
+            <div class="photo-frame">
+              <img
+                src="img/5.jpeg"
+                alt="Momento único"
+                onerror="this.style.display='none'; this.parentNode.innerHTML='💖<br><small>Foto 5</small>';"
+              />
+            </div>
+            <div class="photo-frame">
+              <img
+                src="img/6.jpeg"
+                alt="Para sempre"
+                onerror="this.style.display='none'; this.parentNode.innerHTML='🥰<br><small>Foto 6</small>';"
+              />
+            </div>
+            <div class="photo-frame">
+              <img
+                src="img/7.jpeg"
+                alt="Nosso amor"
+                onerror="this.style.display='none'; this.parentNode.innerHTML='✨<br><small>Foto 4</small>';"
+              />
+            </div>
+            <div class="photo-frame">
+              <img
+                src="img/8.jpeg"
+                alt="Momento único"
+                onerror="this.style.display='none'; this.parentNode.innerHTML='💖<br><small>Foto 5</small>';"
+              />
+            </div>
+            <div class="photo-frame">
+              <img
+                src="img/9.jpeg"
+                alt="Para sempre"
+                onerror="this.style.display='none'; this.parentNode.innerHTML='🥰<br><small>Foto 6</small>';"
+              />
+            </div>
+            <div class="photo-frame">
+              <img
+                src="img/10.jpeg"
+                alt="Nosso amor"
+                onerror="this.style.display='none'; this.parentNode.innerHTML='✨<br><small>Foto 4</small>';"
+              />
+            </div>
+            <div class="photo-frame">
+              <img
+                src="img/11.jpeg"
+                alt="Momento único"
+                onerror="this.style.display='none'; this.parentNode.innerHTML='💖<br><small>Foto 5</small>';"
+              />
+            </div>
+            <div class="photo-frame">
+              <img
+                src="img/12.jpeg"
+                alt="Para sempre"
+                onerror="this.style.display='none'; this.parentNode.innerHTML='🥰<br><small>Foto 6</small>';"
+              />
+            </div>
+            <div class="photo-frame">
+              <img
+                src="img/13.jpeg"
+                alt="Nosso amor"
+                onerror="this.style.display='none'; this.parentNode.innerHTML='✨<br><small>Foto 4</small>';"
+              />
+            </div>
+            <div class="photo-frame">
+              <img
+                src="img/14.jpeg"
+                alt="Momento único"
+                onerror="this.style.display='none'; this.parentNode.innerHTML='💖<br><small>Foto 5</small>';"
+              />
+            </div>
+            <div class="photo-frame">
+              <img
+                src="img/15.jpeg"
+                alt="Para sempre"
+                onerror="this.style.display='none'; this.parentNode.innerHTML='🥰<br><small>Foto 6</small>';"
+              />
+            </div>
+            <div class="photo-frame">
+              <img
+                src="img/16.jpeg"
+                alt="Nosso amor"
+                onerror="this.style.display='none'; this.parentNode.innerHTML='✨<br><small>Foto 4</small>';"
+              />
+            </div>
+            <div class="photo-frame">
+              <img
+                src="img/17.jpeg"
+                alt="Momento único"
+                onerror="this.style.display='none'; this.parentNode.innerHTML='💖<br><small>Foto 5</small>';"
+              />
+            </div>
+            <div class="photo-frame">
+              <img
+                src="img/18.jpeg"
+                alt="Para sempre"
+                onerror="this.style.display='none'; this.parentNode.innerHTML='🥰<br><small>Foto 6</small>';"
+              />
+            </div>
+          </section>
+        </div>
+
+        <footer class="footer">
+          <p>Criado com todo <span class="heart-beat">❤️</span> do universo</p>
+          <p>
+            Para a <span class="girlfriend-name"></span> mais especial do mundo!
+            💫
+          </p>
+          <p>Te amo mil milhões! 💑</p>
+        </footer>
+      </div>
     </div>
 
     <script>
       /* ================= LOADING + PROFILE ================= */
-
       window.addEventListener("load", () => {
+        window.scrollTo(0, 0);
         const loading = document.querySelector(".loading-overlay");
         const profile = document.getElementById("profileScreen");
 
@@ -1296,13 +1462,14 @@
         const profile = document.getElementById("profileScreen");
         const container = document.querySelector(".container");
 
+        container.style.opacity = "0";
         profile.style.opacity = "0";
 
         setTimeout(() => {
           profile.style.display = "none";
-
           container.style.visibility = "visible";
           container.style.opacity = "1";
+          container.style.transition = "opacity 1.2s ease";
         }, 600);
       }
 
